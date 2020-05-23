@@ -1,0 +1,9 @@
+---
+
+- name: start scylla-server and set boot start
+  service: name='scylla-server' enabled=yes state=started
+  ignore_errors: True
+
+- name: start scylla-jmx and set boot start
+  service: name='scylla-jmx' enabled=yes  state=started
+  ignore_errors: True

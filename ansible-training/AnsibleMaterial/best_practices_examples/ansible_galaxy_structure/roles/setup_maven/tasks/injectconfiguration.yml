@@ -1,0 +1,8 @@
+---
+- name: inject maven setttings file user's home
+  template:
+     src: settings.xml.j2
+     dest: "/home/{{ user_name }}/.m2/settings.xml"
+     owner: "{{ user_name }}"
+     group: "{{ group_name }}"
+ 

@@ -1,0 +1,13 @@
+---
+- name: install docker and configure and run containers
+  hosts: all
+  become: true
+  vars_files:
+    - "vars/main.yml"
+
+  tasks:
+    - name: Configure docker daemon
+      template:
+              src: templates/daemon.json.j2
+              dest: /tmp/daemon.json  
+   

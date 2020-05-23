@@ -1,0 +1,9 @@
+---
+- name: remove packages 
+  file:
+    path: "{{ item.src }}"
+    state: absent
+  with_items:
+    - src: "{{ tomcat_dir }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    - src: "{{ java_dir }}/jdk-8u131-linux-x64.tar.gz"      
+            

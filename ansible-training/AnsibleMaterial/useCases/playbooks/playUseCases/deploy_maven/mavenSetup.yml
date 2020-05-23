@@ -1,0 +1,79 @@
+- name: setup jenkins
+  hosts: all
+  environment:
+       MAVEN_HOME: "/data/apache-maven/3.2.5/apache-maven-3.2.5"
+       JAVA_HOME: "/data/java/1.8.0_131/jdk1.8.0_131"
+       PATH: "{{ ansible_env.MAVEN_HOME }}/bin:{{ ansible_env.JAVA_HOME }}/bin:{{ ansible_env.PATH }}"
+
+  tasks:
+    - name: tasks performed by root
+      block:        
+        - name: create directory for tomcat
+          file:
+            path: /data/apache-maven/3.2.5
+            state: directory
+            recurse: yes
+
+        - name: create directory for tomcat
+          file:
+            path: /home/ayushbisaria/.m2
+            state: directory
+            recurse: yes
+        
+        - name: download maven
+          get_url:
+             url: "http://www-us.apache.org/dist/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz"
+             dest: "/data/apache-maven/3.2.5"
+             headers: ""    
+
+        - name: Untar maven
+          unarchive:
+             src: "/data/apache-maven/3.2.5/apache-maven-3.2.5-bin.tar.gz"
+             dest: "/data/apache-maven/3.2.5"
+             remote_src: yes
+        
+        - name: remove tar.gz of java
+          file:
+            path: "/data/apache-maven/3.2.5/apache-maven-3.2.5-bin.tar.gz"
+            state: absent
+        
+        - name: Set maven_home in .bashrc
+          blockinfile:
+              path: "/home/ayushbisaria/.bashrc"
+              block: |
+                 export MAVEN_HOME=/data/apache-maven/3.2.5/apache-maven-3.2.5
+                 export JAVA_HOME=/data/java/1.8.0_131/jdk1.8.0_131
+                 export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH
+
+        - name: inject settings.xml at user's home
+          template:
+             src: settings.xml.j2
+             dest: "/home/ayushbisaria/.m2/settings.xml"
+        
+             
+        - name: change permissions of /data
+          file:     
+            path: "/data/"
+            owner: "ayushbisaria"
+            group: "ayushbisaria"
+            recurse: yes    
+      become: true
+      become_user: root 
+    
+    - name: create directory for tomcat
+      file:
+        path: /tmp/sample_project
+        state: directory
+        recurse: yes
+      
+    - name: clone repo from github
+      git:
+        repo: https://github.com/OpenShiftDemos/os-sample-java-web.git
+        dest: /tmp/sample_project
+        clone: yes
+
+    - name: build the project
+      command: mvn clean install
+      args:
+        chdir: /tmp/sample_project     
+

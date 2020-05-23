@@ -1,0 +1,40 @@
+
+###############################################################################################################
+# please replace below using with your linux user and group
+#
+###############################################################################################################
+user_name: "ayushbisaria"
+group_name: "ayushbisaria"
+###############################################################################################################
+
+###############################################################################################################
+# java variables
+# if you want more java to be set add something, in below dictionary variable java_packages but maintain
+# below indentation 
+###############################################################################################################
+# 1.7.0_77:
+#      tar_name: "jdk-7u77-linux-x64.tar.gz"
+#      package_url: "{{ oracle_url }}/otn/java/jdk/7u77-b15/jdk-7u77-linux-x64.tar.gz"
+##############################################################################################################
+java_installation_directory: "/data/java"
+java_packages: 
+        1.7.0.80:
+                tar_name: "jdk-7u80-linux-x64.tar.gz"
+                package_url: "{{ oracle_url }}/7u80-b15/jdk-7u80-linux-x64.tar.gz"
+                se_version: 7
+        1.8.0_121:
+                tar_name: "jdk-8u121-linux-x64.tar.gz"
+                package_url: "{{ oracle_url }}/8u121-b13/jdk-8u121-linux-x64.tar.gz"
+                se_version: 8
+###############################################################################################################
+
+###############################################################################################################
+# if you are downloading multiple jdk's, specify default java_home but if its single installation comment below 
+#
+default_java: "1.8.0_121"
+###############################################################################################################
+###############################################################################################################
+# Oracle info 
+###############################################################################################################
+#oracle_url: "http://ftp.osuosl.org/pub/funtoo/distfiles/oracle-java"
+oracle_url: "https://files-cdn.liferay.com/mirrors/download.oracle.com/otn-pub/java/jdk"

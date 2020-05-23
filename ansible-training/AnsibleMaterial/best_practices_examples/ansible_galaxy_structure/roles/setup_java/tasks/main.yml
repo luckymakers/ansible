@@ -1,0 +1,6 @@
+---
+- name: include all tasks    
+  include_tasks: "allTasks.yml"  
+  loop: "{{ lookup('dict', java_packages) }}"
+  
+# - include_tasks: "verifyJava.yml"

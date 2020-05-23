@@ -1,0 +1,13 @@
+---
+- name: inject configuration files
+  template:
+     src: "{{ item.src_file }}"
+     dest: "{{ item.dest_location }}"
+  with_items:
+     - src_file: templates/set_env.sh.j2
+       dest_location: "{{ tomcat_home }}/bin/set_env.sh"     
+     - src_file: templates/tomcat_catalina.sh.j2
+       dest_location: "{{ tomcat_home }}/bin/catalina.sh"     
+     - src_file: templates/tomcat_server.xml.j2
+       dest_location: "{{ tomcat_home }}/conf/server.xml"     
+

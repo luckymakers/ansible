@@ -1,0 +1,6 @@
+- name: change ownership of "{{ java_installation_directory }}/{{ item.key }}"
+  file:
+    path: "{{ java_installation_directory }}/{{ item.key }}"
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    recurse: yes    

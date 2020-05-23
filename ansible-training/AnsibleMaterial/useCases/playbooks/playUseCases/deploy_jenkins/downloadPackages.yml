@@ -1,0 +1,17 @@
+---
+- name: download packages
+  get_url:
+     url: "{{ item.package_url }}"
+     dest: "{{ item.dest_dir }}"
+     headers: "{{ item.headers_data }}"
+  with_items:
+    - package_url : "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz"
+      dest_dir: "{{ java_dir }}"
+      headers_data: "Cookie: oraclelicense=accept-securebackup-cookie" 
+    - package_url: "http://archive.apache.org/dist/tomcat/tomcat-7/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+      dest_dir: "{{ tomcat_dir }}"
+      headers_data: ""
+    - package_url: "https://updates.jenkins-ci.org/download/war/{{ jenkins_version }}/jenkins.war"
+      dest_dir: "{{ jenkins_deploy_dir }}"
+      headers_data: ""   
+

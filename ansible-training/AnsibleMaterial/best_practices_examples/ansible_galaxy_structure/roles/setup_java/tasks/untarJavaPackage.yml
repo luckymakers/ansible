@@ -1,0 +1,6 @@
+- name: untar java version "{{ item.key }}"
+  unarchive:
+    src: "{{ java_installation_directory }}/{{ item.key }}/{{ item.value.tar_name }}"
+    dest: "{{ java_installation_directory }}/{{ item.key }}"
+
+

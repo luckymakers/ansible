@@ -1,0 +1,10 @@
+- name: Set Environemt
+  hosts: all
+  
+  environment:
+     JAVA_HOME: "/data/java/jdk"
+     PATH: "/usr/bin:{{ ansible_env.PATH }}:{{ ansible_env.JAVA_HOME }}"     
+  tasks:
+  - name: setting environment
+    shell: "echo $PATH"
+

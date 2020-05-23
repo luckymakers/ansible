@@ -1,0 +1,11 @@
+--- 
+- name: example for loop control
+  hosts: all
+  tasks:
+          - include_tasks: "innerloop.yml"
+            with_items:
+               - ayush
+               - bisaria
+               - raj     
+            loop_control:
+               loop_var: outer_item 

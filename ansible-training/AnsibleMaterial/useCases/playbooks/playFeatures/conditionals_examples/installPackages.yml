@@ -1,0 +1,14 @@
+---
+
+- name: check if package is available
+  debug: 
+        msg : "{{ item }} is not present " 
+  when: 'output.stdout.find(item) == -1'
+
+- name: "install {{ item }} package" 
+  apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+  when: 'output.stdout.find(item) == -1'
+        

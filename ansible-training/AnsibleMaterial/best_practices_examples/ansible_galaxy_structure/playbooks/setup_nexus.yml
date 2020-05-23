@@ -1,0 +1,9 @@
+---
+- name: setup nexus
+  hosts: all
+  roles:
+    - roles/setup_nexus     
+  environment:
+       MAVEN_HOME: "/data/apache-maven/3.2.5/apache-maven-3.2.5"
+       JAVA_HOME: "/data/java/1.8.0_121/jdk1.8.0_121"
+       PATH: "{{ ansible_env.MAVEN_HOME }}/bin:{{ ansible_env.JAVA_HOME }}/bin:{{ ansible_env.PATH }}"

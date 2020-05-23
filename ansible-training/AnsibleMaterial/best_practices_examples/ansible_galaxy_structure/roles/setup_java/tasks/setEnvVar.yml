@@ -1,0 +1,25 @@
+- name: set env in .bashrc when default_java is not defined
+  block:
+   - name: Set "JAVA-{{ item.key }}_HOME" in .bashrc
+     lineinfile:
+       path: "/home/{{ user_name }}/.bashrc"
+       insertafter:
+       state: present       
+       line:  "export JAVA{{ item.value.se_version }}_HOME={{ java_installation_directory }}/{{ item.key }}/jdk{{ item.key }}"
+   
+   - name: Set default java if list contains different versions of java
+     lineinfile:
+       path: "/home/{{ user_name }}/.bashrc"
+       insertafter:
+       state: present       
+       line:  "export PATH={{ java_installation_directory }}/{{ default_java }}/jdk{{ default_java }}/bin:$PATH"
+  when: default_java is defined 
+
+
+- name: Set "JAVA-{{ item.key }}_HOME" in .bashrc
+  blockinfile:
+    path: "/home/{{ user_name }}/.bashrc"
+    block: |
+       "export JAVA{{ item.value.se_version }}_HOME={{ java_installation_directory }}/{{ item.key }}"
+       "export PATH=$JAVA{{ item.value.se_version }}_HOME/bin:$PATH"      
+  when: default_java is not defined  

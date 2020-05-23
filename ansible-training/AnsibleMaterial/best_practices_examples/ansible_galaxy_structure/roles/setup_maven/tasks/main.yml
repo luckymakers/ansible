@@ -1,0 +1,13 @@
+---
+- name: include all tasks    
+  block:
+   - include_tasks: "createDirectory.yml"
+   - include_tasks: "downloadMavenPackage.yml"
+   - include_tasks: "untarMavenPackage.yml"  
+   - include_tasks: "injectconfiguration.yml"
+   - include_tasks: "setEnvVars.yml"
+   - include_tasks: "changeOwnership.yml"
+   - include_tasks: "removeMavenPackage.yml"
+  become: true
+  become_user: root
+  

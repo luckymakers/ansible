@@ -1,0 +1,6 @@
+---
+- tasks:
+   - name: get jenkins war file
+     get_url:
+       url: "http://ftp-chi.osuosl.org/pub/jenkins/war/2.136/jenkins.war"
+       dest: "/tmp"        

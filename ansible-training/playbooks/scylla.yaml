@@ -1,0 +1,10 @@
+- name: setup search scylla cluster
+  hosts: ansible-test-vm
+  vars:
+    scylla:
+      cluster_name:  scylla-cluster                 # Unique cluster name
+      cluster_seeds: "{{ ansible_default_ipv4.address }}"      # Need at least 1 live seed node for new nodes to join the cluster (use 1:3 ratio) comma separated
+      NIC: ens4                                     # NIC to be used with optimized queue(eth0 (ali),ens4(gcp))
+
+  roles:
+    - scylladb

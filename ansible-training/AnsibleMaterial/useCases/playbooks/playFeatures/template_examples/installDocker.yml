@@ -1,0 +1,82 @@
+---
+- name: install docker and configure and run containers
+  hosts: all
+  become: true
+  vars_files:
+    - "vars/main.yml"
+
+  tasks:
+    - name: Install aptitude using apt
+      apt: 
+        name: aptitude 
+        state: latest 
+        update_cache: yes 
+        force_apt_get: yes
+
+    - name: Install required system packages
+      apt: 
+        name: "{{ item }}" 
+        state: latest 
+        update_cache: yes
+      loop: 
+        - 'apt-transport-https'
+        - 'ca-certificates'
+        - 'curl'
+        - 'easy_install'
+        - 'software-properties-common'
+
+    - name: install pip
+      easy_install:
+        name: pip
+        state: latest
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt: 
+        name: docker-ce 
+        update_cache: yes 
+        state: latest
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+    
+    - name: Configure docker daemon
+      template:
+              src: templates/daemon.json.j2
+              dest: "{{ daemon_config_directory }}"    
+      notify: restart docker daemon service   
+    
+    - name: Log into DockerHub
+      docker_login:
+              username: "luckymakers"
+              password: "Mnbvcx-1234"
+    
+    - name: Pull default Docker image
+      docker_image:
+              name: "{{ default_container_image }}"
+              source: pull
+
+    - name: Create default containers
+      docker_container:
+              name: "{{ default_container_name }}{{ item }}"
+              image: "{{ default_container_image }}"
+              command: "{{ default_container_command }}"
+              state: present
+      with_sequence: count={{ create_containers }}
+          
+  handlers:
+    - name: restart docker daemon service
+      service:
+              name: docker
+              state: restarted
+              

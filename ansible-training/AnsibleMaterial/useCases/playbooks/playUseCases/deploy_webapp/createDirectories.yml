@@ -1,0 +1,11 @@
+---
+- name: create directory for tomcat
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+  with_items: 
+    - "{{ tomcat_dir }}" 
+    - "{{ java_dir }}" 
+    - "{{ jenkins_deploy_dir }}"  
+

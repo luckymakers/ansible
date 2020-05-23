@@ -1,0 +1,7 @@
+- name: untar nexus
+  unarchive:
+    src: "{{ nexus_installation_directory }}/{{ nexus_version }}/nexus-{{ nexus_version }}-unix.tar.gz"
+    dest: "{{ nexus_installation_directory }}/{{ nexus_version }}"
+    remote_src: yes
+
+

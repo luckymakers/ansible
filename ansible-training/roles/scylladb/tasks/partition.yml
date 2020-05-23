@@ -1,0 +1,19 @@
+---
+
+- name: Check if there is a disk
+  stat:
+    path: /dev/vdb
+  register: data_disk_1
+
+- name: Check if there is a second disk
+  stat:
+    path: /dev/vdc
+  register: data_disk_2
+
+- name: Check if lvm is already created
+  stat:
+    path: /dev/vgdata/lvdata
+  register: data_disk_vol
+
+- include: data_disk_normal.yml
+  when: not data_disk_vol.stat.exists and data_disk_1.stat.exists and not data_disk_2.stat.exists

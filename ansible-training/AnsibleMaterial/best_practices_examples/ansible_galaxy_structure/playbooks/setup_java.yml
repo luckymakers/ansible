@@ -1,0 +1,8 @@
+---
+- name: setup java
+  hosts: all
+  roles:
+    - roles/setup_java     
+  become: true
+  become_user: root
+

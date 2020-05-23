@@ -1,0 +1,5 @@
+- name: setup maven 
+  hosts: ansible-test-vm
+  become: yes
+  roles:
+    - setup-maven

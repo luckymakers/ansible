@@ -1,0 +1,12 @@
+---
+- name: Untar packages
+  unarchive:
+     src: "{{ item.src_dir }}"
+     dest: "{{ item.dest_dir }}"
+     remote_src: yes
+  with_items:
+    - src_dir: "{{ java_dir }}/jdk-8u131-linux-x64.tar.gz"
+      dest_dir: "{{ java_dir }}"
+    - src_dir: "{{ tomcat_dir }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
+      dest_dir: "{{ tomcat_dir }}"         
+             

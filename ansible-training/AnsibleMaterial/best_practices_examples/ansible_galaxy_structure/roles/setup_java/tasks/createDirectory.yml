@@ -1,0 +1,5 @@
+- name: Create java directories
+  file:
+    path: "{{ java_installation_directory }}/{{ item.key }}"
+    state: directory
+

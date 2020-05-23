@@ -1,0 +1,65 @@
+- name: setup nexus
+  hosts: all
+  environment:
+       MAVEN_HOME: "/data/apache-maven/3.2.5/apache-maven-3.2.5"
+       JAVA_HOME: "/data/java/1.8.0_131/jdk1.8.0_131"
+       PATH: "{{ ansible_env.MAVEN_HOME }}/bin:{{ ansible_env.JAVA_HOME }}/bin:{{ ansible_env.PATH }}"
+
+  tasks:
+    - name: tasks performed by root
+      block:        
+        - name: create directory for nexus
+          file:
+            path: /data/nexus/3.13.0-01
+            state: directory
+            recurse: yes
+
+        - name: download nexus
+          get_url:
+             url: "https://sonatype-download.global.ssl.fastly.net/repository/repositoryManager/3/nexus-3.13.0-01-unix.tar.gz"
+             dest: "/data/nexus/3.13.0-01"
+             headers: ""    
+
+        - name: Untar nexus
+          unarchive:
+             src: "/data/nexus/nexus-3.13.0-01-unix.tar.gz"
+             dest: "/data/nexus/3.13.0-01"
+             remote_src: yes
+        
+        - name: remove tar.gz of java
+          file:
+            path: "/data/nexus/3.13.0-01/nexus-3.13.0-01-unix.tar.gz"
+            state: absent
+        
+        - name: Set maven_home in .bashrc
+          blockinfile:
+              path: "/home/ayushbisaria/.bashrc"
+              block: |
+                 export MAVEN_HOME=/data/apache-maven/3.2.5/apache-maven-3.2.5
+                 export JAVA_HOME=/data/java/1.8.0_131/jdk1.8.0_131
+                 export PATH=$MAVEN_HOME/bin:$JAVA_HOMEi/bin:$PATH
+
+        - name: inject nexus properties file user's home
+          template:
+             src: nexus_properties.j2
+             dest: "/data/nexus/3.13.0-01/nexus-3.13.0-01/etc/nexus-default.properties"
+        
+        - name: inject nexus properties file user's home
+          template:
+             src: nexus.rc.j2
+             dest: "/data/nexus/3.13.0-01/nexus-3.13.0-01/bin/nexus.rc"
+             
+        - name: change permissions of /data
+          file:     
+            path: "/data/"
+            owner: "ayushbisaria"
+            group: "ayushbisaria"
+            recurse: yes    
+      become: true
+      become_user: root
+
+    - name: Start Nexus
+      command: nohup nexus run
+      args:
+        chdir: /data/nexus/3.13.0-01/nexus-3.13.0-01/bin  
+

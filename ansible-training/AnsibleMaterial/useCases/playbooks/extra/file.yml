@@ -1,0 +1,27 @@
+---
+- name: create a file
+  hosts: all
+  tasks:
+    - name: create a file
+      file:
+        path: /tmp/test.file
+        state: touch
+        #    - name: add something in above file
+        #      lineinfile:
+        #        path: /tmp/test.file
+        #        line: "name=ayush"
+    
+    - name: Replace something in file
+      lineinfile:
+        path: /tmp/test.file
+        regexp: '^name='
+        line: "full_name=AyushBISARIA"
+
+        #    - name: change permission of file
+        #      file: 
+        #        path: /tmp/test.file
+        #        owner: root 
+        #        group: root
+        #        mode: 0777
+        #      become: yes
+        #      become_user: root      

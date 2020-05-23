@@ -1,0 +1,13 @@
+---
+gcp_project: cloudcover-sandbox
+gcp_cred_kind: serviceaccount
+gcp_cred_file: cc-ansible-svc-45f4f8d80671.json
+zone: "asia-south1-c"
+region: "asia-south1"
+source_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
+machine_type: n1-standard-1
+instance_name: ansible-test
+disk_size: 10
+scopes : https://www.googleapis.com/auth/compute
+network_name: default
+

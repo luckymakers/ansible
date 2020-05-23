@@ -1,0 +1,39 @@
+tomcat_version: "7.0.61"
+tomcat_dir: "/data/apache-tomcat"
+tomcat_home: "{{ tomcat_dir }}/apache-tomcat-{{ tomcat_version }}"
+tomcat_port: 8085
+
+java_version: "1.8.0_131"
+java_dir: "/data/java/{{ java_version }}"
+java_home: "{{ java_dir }}/jdk{{ java_version }}"
+
+jenkins_home: "/data/jenkins_home"
+jenkins_deploy_dir: "{{ tomcat_home }}/webapps"
+jenkins_version: "2.189"    
+
+#nexus_url: "http://192.168.88.1:8082/repository"
+#nexus_snapshot_repo: "maven-snapshots"
+#extension: "war"
+#artifactId: "getting-started-tomcat"
+#baseVersion: "1.0-SNAPSHOT"
+#version: "{{ package_version }}"
+#groupId: "openshift"
+#package_url : "{{ nexus_url }}/{{ nexus_snapshot_repo }}/{{ groupId }}/{{ artifactId }}/{{ baseVersion }}/{{ artifactId }}-{{ version }}.{{ extension }}"
+#apache_deploy_dir: "{{ tomcat_home }}/webapps"
+#user: "admin"
+#password: "admin123"
+
+
+#http://localhost:8082/nexus/repository/maven-releases/sparkjava-hello-world/sparkjava-hello-world/1.0/sparkjava-hello-world-1.0.war
+
+
+nexus_url: "http://192.168.154.128:8082/nexus/repository"
+nexus_snapshot_repo: "maven-releases"
+extension: "war"
+artifactId: "sparkjava-hello-world"
+version: "{{ package_version }}"
+groupId: "sparkjava-hello-world"
+package_url : "{{ nexus_url }}/{{ nexus_snapshot_repo }}/{{ groupId }}/{{ artifactId }}/{{ version }}/{{ artifactId }}-{{ version }}.{{ extension }}"
+apache_deploy_dir: "{{ tomcat_home }}/webapps"
+user: "admin"
+password: "@yushB1993"

@@ -1,0 +1,171 @@
+---
+- name: loop and loop control example
+  hosts: all
+  tasks:
+
+          - name: define variable
+            set_fact:
+              variable_1:
+                 - ayush
+                 - bisaria
+                 - venky
+                 - prabhav
+
+          - name: print variable
+            debug:
+              var: variable_1
+
+          - name: loop over variable
+            debug:
+              msg: " hi {{ item }}"
+            with_items:
+               - "{{ variable_1|list }}"
+
+#################################################################################################################################
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#################################################################################################################################
+          - name: define json variable
+            set_fact:
+                    var_json: {
+                            "tardis": { "application_name":"ROBOTICS", "domain_name":"jenkins.cib.com" },
+                            "iv2":    { "application_name":"fastitlab", "domain_name":"jenkins.stg.com" }
+                            }
+
+          - name: print var_json vars
+            debug:
+                    var: var_json['tardis']
+
+          - name: message var_json vars
+            debug:
+                    msg: "{{ var_json['tardis'] }}" 
+                    #          - name: loop over json keys
+                    #            debug:
+                    #              msg: "hi {{ item.application_name }}"
+                    #            with_items: "{{ var_json }}"
+
+
+
+#################################################################################################################################
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#################################################################################################################################
+
+
+          - name: define dict variable
+            set_fact:
+                    dict_json:
+                        tardis:
+                             application_name: "ROBOTICS"
+                             domain_name: "jenkins.cib.com"
+                        iv2:
+                              application_name: "fastitlab"
+                              domain_name: "jenkins.stg.com"
+
+          - name: print dict vars
+            debug:
+                    var: dict_json
+
+          - name: loop over dict keys
+            debug:
+              msg: "hi {{ item.value.application_name }}"
+            with_items: "{{ lookup('dict',dict_json) }}"
+
+
+
+
+#################################################################################################################################
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#################################################################################################################################
+
+          - name: define list variable
+            set_fact:
+                mylist: 
+                   - "ayush"
+                   - "nishant"
+                   - "vaishnavi" 
+                   - "rahul"
+
+          - name: Print list variable 
+            debug: 
+               var: mylist
+          - name: loop over list
+            debug:
+              msg: "hi {{ item }}"
+            loop: "{{ lookup('list', mylist) }}"            

@@ -1,0 +1,18 @@
+---
+#- name: Set java_home  and path variable in .bashrc
+  # blockinfile:
+  #    path: "/home/ayushbisaria/.bashrc"
+  #    block: |
+  #       export JAVA_HOME={{ java_home }}  
+  #       export PATH=$JAVA_HOME/bin:$PATH
+  # environment:
+  #    JAVA_HOME: "{{ java_home }}"
+  #    PATH: "/usr/bin:{{ ansible_env.PATH }}"
+
+- name: settt
+  hosts: all
+  tasks:
+   - name: set
+     lineinfile:
+       path: "/home/ayushbisaria/.bashrc"
+       line: "export ayush=AYUSH"    

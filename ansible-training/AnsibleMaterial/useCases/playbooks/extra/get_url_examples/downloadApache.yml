@@ -1,0 +1,7 @@
+---
+- tasks:
+   - name: download tomcat tar.gz
+     get_url:
+       url: "http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz"
+       dest: "/tmp"
+

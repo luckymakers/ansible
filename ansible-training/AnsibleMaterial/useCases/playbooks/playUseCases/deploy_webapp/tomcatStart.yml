@@ -1,0 +1,4 @@
+---
+- name: start tomcat
+  command: nohup {{ tomcat_home }}/bin/startup.sh
+

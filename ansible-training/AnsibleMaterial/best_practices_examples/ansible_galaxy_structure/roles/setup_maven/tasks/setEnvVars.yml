@@ -1,0 +1,9 @@
+---
+- name: Set maven_home in .bashrc
+  blockinfile:
+      path: "/home/ayushbisaria/.bashrc"
+      block: |
+         export MAVEN_HOME={{ maven_installation_directory }}/{{ maven_version }}/apache-maven-{{ maven_version }}
+         export JAVA_HOME=/data/java/1.8.0_121/jdk1.8.0_121
+         export PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH
+

@@ -1,0 +1,4 @@
+- name: Remove "apache-maven-{{ maven_version }}-bin.tar.gz"
+  file:
+    path: "{{ maven_installation_directory }}/{{ maven_version }}/apache-maven-{{ maven_version }}-unix.tar.gz"
+    state: absent    

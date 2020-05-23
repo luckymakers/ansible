@@ -1,0 +1,5 @@
+- name: setup and install java 
+  hosts: ansible-test-vm
+  become: yes
+  roles:
+    - setup-java

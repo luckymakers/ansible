@@ -1,0 +1,24 @@
+---
+- name: loop and loop control example
+  hosts: all
+  tasks:
+          - name: print vars i.e simple loop
+            debug:
+                    msg: "Hi {{ item }}"
+            loop:
+              - shubham
+              - venky
+              - rashi
+              - swaroop
+              - anup
+
+          - name: print first and last name
+            debug:
+              msg: "{{ item.first }} {{ item.last }}"
+            with_items:
+              - first: ayush
+                last: bisaria
+              - first: venky
+                last: sharma
+              - first: rashi
+                last: vani  

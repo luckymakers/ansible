@@ -1,0 +1,27 @@
+---
+- name: create list from loop
+  hosts: all
+  tasks:
+   - name: loop
+     set_fact:
+        foo: "{{ item }}"
+     with_items:
+             - ayush
+             - venky
+             - raman
+     register: foo_fact
+     until: foo_fact is success
+     delay: 2
+     retries: 5
+
+   - name: print foo_fact
+     debug:
+       var: foo_fact
+
+   - name: create list
+     set_fact:
+             listOfNames: "{{ foo_fact.results|map(attribute='ansible_facts.foo') | list }}"     
+             
+   - name: print names
+     debug:
+       var: listOfNames

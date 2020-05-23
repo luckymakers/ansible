@@ -1,0 +1,32 @@
+---
+- name: download packages
+  get_url:
+     url: "{{ item.package_url }}"
+     dest: "{{ item.dest_dir }}"
+     headers: "{{ item.headers_data }}"
+     url_username: "{{ item.url_username }}"
+     url_password: "{{ item.url_password }}"
+     force_basic_auth: "{{ item.force_basic_auth }}"
+     validate_certs: "{{ item.validate_certs }}"
+  with_items:
+    - package_url : "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz"
+      dest_dir: "{{ java_dir }}"
+      headers_data: "Cookie: oraclelicense=accept-securebackup-cookie" 
+      url_username: ""
+      url_password: ""
+      force_basic_auth: no
+      validate_certs: no
+    - package_url: "http://archive.apache.org/dist/tomcat/tomcat-7/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+      dest_dir: "{{ tomcat_dir }}"
+      headers_data: ""
+      url_username: ""
+      url_password: ""
+      force_basic_auth: no
+      validate_certs: no
+    - package_url: "{{ package_url }}"
+      dest_dir: "{{ apache_deploy_dir }}"
+      headers_data: ""
+      url_username: "{{ user }}"
+      url_password: "{{ password }}"
+      force_basic_auth: yes
+      validate_certs: no

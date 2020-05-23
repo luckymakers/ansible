@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir -p /data/scylla/commitlog
+mkdir -p /data/scylla/data
+mkdir -p /data/scylla/saved_caches
+chown -R scylla:scylla /data/scylla
+scylla_setup --setup-nic --nic "{{ scylla.NIC|quote }}" --no-ec2-check --no-ntp-setup --no-raid-setup --no-coredump-setup

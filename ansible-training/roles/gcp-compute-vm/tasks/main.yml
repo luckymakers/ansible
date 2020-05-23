@@ -1,0 +1,6 @@
+---
+# Create VMs
+- name: Include vm creation tasks
+  include_tasks: "vm_creation_gcp.yml"
+  when:
+    - "cloud_provider|lower == 'gcp'"

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "norse-geode-274508",
+  "private_key_id": "aec7c443d00c9ac9a661dcfcc7bbda83be8e8206",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDXsjJYDp5bkcnF\nNooKhZBSZRRcOEIqSaniwaQvsnXSme0X8KbUd2D8IJXHIYNvTPLpl1dwzee9Vp+H\n3oLJLd8wTOq7dm6KlQuicTO2wblqGfXsztD3bQ+AzXJis3B1qissds6WvHGz90kS\n3h0UKzFMEI3qWDxNw2E+MoVGTS6L3YGKMzq6aDn3d0U4EG54G9PSzlh2/80sYveX\nRXDP33bdguWowl/bIndKKuslLdmXoBzfu5E1+LiVlNfrwOOclRU9BvO1z/4zfBrs\nGRAjyo1xG/ww3HH0ai2hZG6t8Swj5RClT56ecbjH+OHFuueIw5iBtmlwa879SKNN\nK1DnPPFDAgMBAAECggEAGPaZ3ADJHr5B31i0uOCvYicqUuf8mbSlJvC+pfnd/ViX\njOiVrkuosQARGuxL2rhJpB5CCPSo/YvxHQJJbwDSRAlK4L+lWIBFH0ZBtBo58XJ9\nY1b7mVSJHEuVZvXvLeGwFc55kg7PjAKydYQOUn9ojlibdsPtKsTSKXwjBOQO3zHg\n5Zh+LNp2VTLZY6rdE0OU65DvT+plfVej/DuVDNcCoqJyiEv81mKh+91+ML8T/4x+\nEqYL2Q7s3bmHh1HBTvdc3bRcfUmr4d2RB8M+xQ07mMXfv9B/ySHOOySWanqnxHxF\nUNDK4AHtpojxWFqoAJeQfrwTV2scsCptQbel8RwnhQKBgQD/PrGmS3qaEAQCGgsw\nrCFZSyv41yIiImygzAqNCt36GHUq4ygKJD67krmYXJk237LWhe90HqGjJXmWxYaY\nqjOfHhV1ibWNpbmB6Girv7eqP/+NoVJaiAKyZPtV0/98RjPBRT89Jj7L0iaZtR50\nOkh6EySYAwOAPKjdmG/Z1jUDlQKBgQDYVY0NRORCBjm8O/SIJD015BoBIuqKuwkT\ntKXg1fbEN4fQif3GDh8bT/SddkeUAn7hbcekRK6Kzz6RI9giHec4Ccjgp4E8ThnN\n1IMNLCcpWZMVsp2kOwXJVr4tWmlRE1nGxiz6j+egTOiW902T7im36aXem4lBvjrA\nN2vrJXVrdwKBgQCOy0wndGKKfhs/8cIA4MtnYR6gf/qgjhGng38DmOjGWZhy/dIQ\nmmZeGZ+rFWLByDQMv7FOjTRwSS7UonzCO7XVdscakof3TpeRjavBKeheXp9hZLbl\n3uFjXAsf4RI1PDEIFu1iEFthO5hMtX7sFw8k/ECkqkrzGvx9vCIXBDd0YQKBgQC1\noMYnANMfd7ibiD7a2oolp9gJYjZGuZd6Wu314c4nmXPGq0RMN2j4dl2qojagVqQO\nQiweh6d/VVZzZwO8SRzqmJR1wUyow+24ORa6RXqvpcvuqKLf0sod610KGOFZN4Tl\ndVcoGw/eLxQMQ593drrB9UHUrwNDFiKfZSiPKUj3KwKBgB0OseaXnrluPgs/FCRh\nY8oDuebCpp5mklMKMc3TSsFp5l7djU9uvNUFsPReh1cHSDtpAaANf4LKACYQuzIG\nDlqGIpOPfke9v1vfarFw88oopk2/7EQCNs61IxUoAscBF3mVbejDwCvNTrCxW+ak\ndJXoUyFEEggVNTo8CVzmaKeJ\n-----END PRIVATE KEY-----\n",
+  "client_email": "devops-techrevoluno@norse-geode-274508.iam.gserviceaccount.com",
+  "client_id": "112859038536535401945",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/devops-techrevoluno%40norse-geode-274508.iam.gserviceaccount.com"
+}

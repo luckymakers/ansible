@@ -1,0 +1,12 @@
+---
+- debug:
+        msg: "Hi {{ outer_item }} , below are your items"
+
+
+- name: print comman features
+  debug:
+          msg: "{{ item }}"
+  with_items:
+     - BNP
+     - mumbai
+     - india       

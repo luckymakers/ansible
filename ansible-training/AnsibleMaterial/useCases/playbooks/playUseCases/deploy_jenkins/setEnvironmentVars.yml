@@ -1,0 +1,7 @@
+---
+- name: Set java_home  and path variable in .bashrc
+  blockinfile:
+     path: "/home/ayushbisaria/.bashrc"
+     block: |
+        export JAVA_HOME={{ java_home }}  
+        export PATH=$JAVA_HOME/bin:$PATH

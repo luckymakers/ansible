@@ -1,0 +1,16 @@
+---
+- name: variables
+  hosts: all
+  vars:
+        url: "ayush"
+  vars_files:
+          - "test_var.yml"      
+  tasks:
+          - debug:
+                  var: url
+          - set_fact: 
+                url: "ayushbisaria123"        
+          - shell: "echo {{ url }}"
+          - shell: "echo {{ url1 }}"
+          
+

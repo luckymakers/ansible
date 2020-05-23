@@ -1,0 +1,6 @@
+- name: download java version "{{ item. key }}"
+  get_url:
+    url: "{{ item.value.package_url }}"
+    dest: "{{ java_installation_directory }}/{{ item.key }}"
+    #headers: 'Cookie: oraclelicense=accept-securebackup-cookie'     
+

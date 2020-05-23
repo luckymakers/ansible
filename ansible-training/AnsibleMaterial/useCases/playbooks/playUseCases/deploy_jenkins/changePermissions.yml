@@ -1,0 +1,6 @@
+- name: Change ownership of /data directory
+  file:
+     path: "/data/"
+     owner: "ayushbisaria"
+     group: "ayushbisaria"
+     recurse: yes

@@ -1,0 +1,26 @@
+---
+- name: Playbook to install and deploy jenkins
+  hosts: all
+          
+  vars_files:
+     - "setVars.yml" 
+  environment:
+     JAVA_HOME: "{{ java_home }}"
+     PATH: "{{ ansible_env.JAVA_HOME }}/bin:{{ ansible_env.PATH }}"
+  
+  tasks:
+    - name: tasks performed by root
+      block:      
+        - include_vars: "setVars.yml"
+        - include_tasks: "createDirectories.yml"
+        - include_tasks: "downloadPackages.yml"
+        - include_tasks: "untarPackages.yml"
+        - include_tasks: "injectConfigurations.yml"
+        - include_tasks: "removePackages.yml" 
+        - include_tasks: "setEnvironmentVars.yml"  
+        - include_tasks: "changePermissions.yml"  
+      become: true
+      become_user: root    
+    - include_tasks: "tomcatStart.yml"  
+     
+      

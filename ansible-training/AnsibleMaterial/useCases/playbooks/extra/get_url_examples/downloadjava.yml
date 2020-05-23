@@ -1,0 +1,15 @@
+---
+- name: download 1.7
+  hosts: all
+  tasks:
+  - name: download java
+    get_url:
+            #url: "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz"
+       url: "https://download.oracle.com/otn-pub/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz"
+       dest: "/tmp"
+       headers:
+               Cookie: "oraclelicense=accept-securebackup-cookie"
+       url_username: "ayush.bisaria5@gmail.com"
+       url_password: "@yushB1993"       
+       force_basic_auth: yes    
+       validate_certs: no

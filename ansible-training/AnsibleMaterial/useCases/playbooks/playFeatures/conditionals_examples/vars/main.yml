@@ -1,0 +1,7 @@
+packages_list:
+        - "jq"
+        - "curl"
+        - "git"
+        - "chromium-browsers"
+        - "openjdk-7-jre-headless" 
+

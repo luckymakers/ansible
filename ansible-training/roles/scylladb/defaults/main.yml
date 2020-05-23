@@ -1,0 +1,5 @@
+---
+scylla_version: 3.2
+scylla_release_version: 3.2.3-0.20200304.48253eb1832-1
+scylla_jmx_release_version: 3.2.3-20200304.6bce24c7753-1
+scylla_tools_release_version: 3.2.3-20200304.d2a1b10114c-1

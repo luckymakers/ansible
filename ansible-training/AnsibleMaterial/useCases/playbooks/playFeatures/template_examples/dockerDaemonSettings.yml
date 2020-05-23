@@ -1,0 +1,10 @@
+---
+- name: configure docker
+  hosts: all
+  vars_files:
+          - "vars/main.yml"
+  tasks:
+          - name: configure daemon json
+            template:
+                    src: templates/daemon.json.j2
+                    dest: "{{ daemon_config_directory }}"

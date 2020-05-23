@@ -1,0 +1,22 @@
+---
+
+- name: Initialize Physical Volume
+  shell: pvcreate /dev/vdb ; sleep 1
+
+- name: Create volume group
+  shell: vgcreate vgdata /dev/vdb ; sleep 1
+
+- name: Create logical volume
+  shell: lvcreate -l +100%FREE -n lvdata vgdata
+
+- name: Create filesystem
+  filesystem:
+    fstype: ext4
+    dev: /dev/vgdata/lvdata
+
+- name: Mount data disk volume to /data
+  mount:
+    name: /data
+    src: /dev/vgdata/lvdata
+    fstype: ext4
+    state: mounted

@@ -1,0 +1,52 @@
+- name: setup java 1.8
+  hosts: all
+  environment:
+       JAVA_HOME: "/data/java/1.8.0_131/jdk1.8.0_131"
+       PATH: "{{ ansible_env.JAVA_HOME }}/bin:{{ ansible_env.PATH }}"
+
+  tasks:
+    - name: tasks performed by root
+      block:
+        - name: create directory for java
+          file:
+            path: /data/java/1.8.0_131
+            state: directory
+            recurse: yes
+
+        - name: download java
+          get_url:
+             url: "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz"
+             dest: "/data/java/1.8.0_131/"
+             headers: 'Cookie: oraclelicense=accept-securebackup-cookie'
+
+        - name: Untar java
+          unarchive:
+             src: "/data/java/1.8.0_131/jdk-8u131-linux-x64.tar.gz"
+             dest: "/data/java/1.8.0_131/"
+             remote_src: yes
+
+        - name: remove tar.gz of java
+          file:
+            path: "/data/java/1.8.0_131/jdk-8u131-linux-x64.tar.gz"
+            state: absent
+
+        - name: Set java_home in .bashrc
+          blockinfile:
+              path: "/home/ayushbisaria/.bashrc"
+              block: |
+                 export JAVA_HOME=/data/java/1.8.0_131/jdk1.8.0_131
+                 export PATH=$JAVA_HOME/bin:$PATH
+
+        - name: Change ownership of /data directory
+          file:
+            path: "/data/"
+            owner: "ayushbisaria"
+            group: "ayushbisaria"
+            recurse: yes
+      become: true
+      become_user: root     
+    
+    - name: check java version
+      command: java -version
+      
+

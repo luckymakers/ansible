@@ -1,0 +1,39 @@
+- name: Install and run nginx proxy server
+  hosts: all
+  tasks:
+  - name: Update apt-get 
+    apt: 
+     update_cache: yes
+
+  - name: Install nginx
+    apt:
+     name: nginx
+     state: present 
+
+  - name: copy the nginx config file and restart nginx
+    copy:
+     src: nginx.cfg
+     dest: /etc/nginx/nginx.conf
+
+  - name: copy the nginx example file 
+    copy:
+      src: nginx_server_config.cfg
+      dest: /etc/nginx/conf.d/example.com.conf
+  
+  - name: create directory
+    file:
+      path: /tmp/sites/
+      state: directory
+      mode: '0755'
+  
+  - name: copy the content of the web site
+    copy:
+      src: index.html
+      dest: /tmp/sites/  
+
+  - name: Start Nginx 
+    service:
+       name: nginx
+       state: restarted
+  become: true
+  become_user: root  

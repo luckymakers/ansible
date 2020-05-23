@@ -1,0 +1,20 @@
+---
+
+- name: set scylladb configuration files
+  template: src="{{item.src}}" dest="/etc/scylla/{{item.dest}}" owner=scylla  group=scylla mode=0644
+  with_items:
+    - { src: 'scylla.yaml.j2', dest: 'scylla.yaml' }
+
+- name: set scylladb boot parameters
+  template:  src='scylla-server.j2' dest='/etc/default/scylla-server' owner=root group=root mode=0644
+
+- name: set scylladb boot parameters
+  template:  src='scylla-jmx.j2' dest='/etc/default/scylla-jmx' owner=root group=root mode=0644
+  when: scylla_version == "3.1"
+
+- name: set scylladb boot parameters
+  template:  src='scylla-jmx-3.2.j2' dest='/etc/default/scylla-jmx' owner=root group=root mode=0644
+  when: scylla_version == "3.2"
+
+- name: set configuration files permissions
+  file: path='/etc/scylla' owner=scylla group=scylla

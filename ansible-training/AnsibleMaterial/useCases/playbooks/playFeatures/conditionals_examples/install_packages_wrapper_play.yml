@@ -1,0 +1,19 @@
+---
+- name: install packages
+  hosts: all
+  become: true
+#  vars_files:
+#          - "vars/main.yml"
+  vars:
+          packages_list:
+                         - "jq"
+                         - "curl"
+                         - "git"
+  tasks:
+          - name: dpkg list
+            shell: dpkg -l
+            register: output
+          
+          
+          - include_tasks: "installPackages.yml"
+            loop: "{{ lookup('list', packages_list) }}"         

@@ -1,0 +1,7 @@
+- name: setup and install nexus 
+  hosts: ansible-test-vm
+  become: yes
+  environment:
+    INSTALL4J_JAVA_HOME: /data/java/1.8.0_121 
+  roles:
+    - setup-nexus

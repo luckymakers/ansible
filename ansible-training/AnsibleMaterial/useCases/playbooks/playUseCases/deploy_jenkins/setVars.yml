@@ -1,0 +1,12 @@
+tomcat_version: "7.0.61"
+tomcat_dir: "/data/apache-tomcat"
+tomcat_home: "{{ tomcat_dir }}/apache-tomcat-{{ tomcat_version }}"
+tomcat_port: 8085
+
+java_version: "1.8.0_131"
+java_dir: "/data/java/{{ java_version }}"
+java_home: "{{ java_dir }}/jdk{{ java_version }}"
+
+jenkins_home: "/data/jenkins_home"
+jenkins_deploy_dir: "{{ tomcat_home }}/webapps"
+jenkins_version: "2.189"        

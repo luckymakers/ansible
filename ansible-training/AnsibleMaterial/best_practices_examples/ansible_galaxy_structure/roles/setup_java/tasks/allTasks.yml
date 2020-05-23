@@ -1,0 +1,7 @@
+---
+- include_tasks: "createDirectory.yml"
+- include_tasks: "downloadJavaPackage.yml"
+- include_tasks: "untarJavaPackage.yml"
+- include_tasks: "setEnvVar.yml"
+- include_tasks: "changeOwnership.yml"
+- include_tasks: "removeJavaPackage.yml"

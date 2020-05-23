@@ -1,0 +1,6 @@
+- name: untar maven
+  unarchive:
+    src: "{{ maven_installation_directory }}/{{ maven_version }}/apache-maven-{{ maven_version }}-bin.tar.gz"
+    dest: "{{ maven_installation_directory }}/{{ maven_version }}"
+    remote_src: yes
+

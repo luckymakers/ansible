@@ -1,0 +1,6 @@
+- name: Create Nexus
+  file:
+    path: "{{ nexus_installation_directory }}/{{ nexus_version }}"
+    state: directory
+    recurse: yes
+

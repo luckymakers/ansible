@@ -1,0 +1,4 @@
+- name: create gcp compute vm 
+  hosts: localhost
+  roles:
+    - gcp-compute-vm

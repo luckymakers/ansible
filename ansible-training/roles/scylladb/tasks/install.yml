@@ -1,0 +1,35 @@
+---
+- name: add apt key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 5e08fbd8b5d6ec9c
+
+- name: install deb
+  get_url:
+    url: http://repositories.scylladb.com/scylla/repo/bd8009ce-8848-11ea-bc55-0242ac130003/ubuntu/scylladb-{{scylla_version}}-bionic.list
+    dest: /etc/apt/sources.list.d/scylla.list
+
+- name: Install scylla and its dependencies
+  apt:
+    pkg:
+       - "scylla={{ scylla_release_version }}"
+       - "scylla-server={{ scylla_release_version }}"
+       - "scylla-jmx={{ scylla_jmx_release_version }}"
+       - "scylla-tools={{ scylla_tools_release_version }}"
+       - "scylla-tools-core={{ scylla_tools_release_version }}"
+       - "scylla-kernel-conf={{ scylla_release_version }}"
+       - "scylla-conf={{ scylla_release_version }}"
+       - xfsprogs
+    state: present
+    update_cache: yes
+
+- name: Create Directories
+  file: path={{ item }} owner=scylla group=scylla mode=0775 state=directory recurse=yes
+  with_items:
+    - /data
+    - /data/scylla/commitlog
+    - /data/scylla/data
+    - /data/scylla/saved_caches
+
+- name: Run scylla setup (may take a long time)
+  shell: scylla_setup --setup-nic --nic "{{ scylla.NIC|quote }}" --no-ec2-check --no-ntp-setup --no-raid-setup --no-coredump-setup

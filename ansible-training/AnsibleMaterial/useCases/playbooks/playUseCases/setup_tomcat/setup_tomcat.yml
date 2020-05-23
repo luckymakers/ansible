@@ -1,0 +1,85 @@
+- name: setup jenkins
+  hosts: all
+  environment:
+       JAVA_HOME: "/data/java/1.8.0_131/jdk1.8.0_131"
+       PATH: "{{ ansible_env.JAVA_HOME }}/bin:{{ ansible_env.PATH }}"
+
+  tasks:
+    - name: tasks performed by root
+      block:        
+        - name: create directory for tomcat
+          file:
+            path: /data/apache-tomcat
+            state: directory
+            recurse: yes
+
+        - name: create directory for java
+          file:
+            path: /data/java/1.8.0_131
+            state: directory
+            recurse: yes
+        
+        - name: download java
+          get_url:
+             url: "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz"
+             dest: "/data/java/1.8.0_131/"
+             headers: 'Cookie: oraclelicense=accept-securebackup-cookie'    
+
+        - name: Untar java
+          unarchive:
+             src: "/data/java/1.8.0_131/jdk-8u131-linux-x64.tar.gz"
+             dest: "/data/java/1.8.0_131/"
+             remote_src: yes
+        
+        - name: remove tar.gz of java
+          file:
+            path: "/data/java/1.8.0_131/jdk-8u131-linux-x64.tar.gz"
+            state: absent
+        
+        - name: Set java_home in .bashrc
+          blockinfile:
+              path: "/home/ayushbisaria/.bashrc"
+              block: |
+                 export JAVA_HOME=/data/java/1.8.0_131/jdk1.8.0_131
+                 export PATH=$JAVA_HOME/bin:$PATH
+
+        - name: download tomcat tar.gz
+          get_url:
+            url: "http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz"
+            dest: "/data/apache-tomcat/"  
+            validate_certs: no
+        
+        - name: Untar tomcat
+          unarchive:
+             src: "/data/apache-tomcat/apache-tomcat-7.0.61.tar.gz"
+             dest: "/data/apache-tomcat/"
+             remote_src: yes
+        
+        - name: remove tar.gz of tomcat
+          file:
+            path: "/data/apache-tomcat/apache-tomcat-7.0.61.tar.gz"
+            state: absent
+
+        - name: inject env script file
+          template:
+             src: set_env.sh.j2
+             dest: "/data/apache-tomcat/apache-tomcat-7.0.61/bin/set_env.sh"
+
+        - name: inject catalina script file
+          template:
+             src: tomcat_catalina.sh.j2
+             dest: "/data/apache-tomcat/apache-tomcat-7.0.61/bin/catalina.sh"
+
+        - name: inject server config file
+          template:
+             src: tomcat_server.xml.j2
+             dest: "/data/apache-tomcat/apache-tomcat-7.0.61/conf/server.xml"
+        
+        - name: Change ownership of /data directory
+          file:
+            path: "/data/"
+            owner: "ayushbisaria"
+            group: "ayushbisaria"
+            recurse: yes    
+      become: true
+      become_user: root 
